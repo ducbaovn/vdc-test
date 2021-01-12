@@ -1,0 +1,10 @@
+node_modules
+npm-debug.log
+npm-error.log
+
+docker
+docker-compose.yml
+.npmrc
+.package-lock.json
+local
+Dockerfile
