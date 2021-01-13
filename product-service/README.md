@@ -21,7 +21,7 @@ npm run migrate:make {filename}
 To transfer object between internal components and response to client
 ## Repositoy pattern
 We using repository pattern to encapsulate the logic required to access data sources. They centralize common data access functionality, providing better maintainability and decoupling the infrastructure or technology used to access databases from the domain model layer.
-![alt text](https://s3-ap-southeast-1.amazonaws.com/cube-tetris.ducbaovn.me/images/1_xxr1Idc8UoNELOzqXcJnag.png)
+![alt text](https://s3-ap-southeast-1.amazonaws.com/cube-tetris.ducbaovn.me/images/1_xxr1Idc8UoNELOzqXcJnag.png =100x20)
 ### Repository
 ```
 export declare class BaseRepository<T extends BaseModel<T>, X extends BaseDto> {
