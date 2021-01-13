@@ -57,7 +57,7 @@ export declare class BaseRepository<T extends BaseModel<T>, X extends BaseDto> {
 }
 ```
 ### Models
-This class extends bookshelf model for ORM using.
+This class extends bookshelf model for ORM using. It is "Data Source" in image above
 ```
 export declare abstract class BaseModel<T> extends BaseModel_base<any> {
     private static generateUuid;
