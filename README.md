@@ -24,7 +24,7 @@ and mongodb client on http://localhost:8181
 username: root
 password: example
 ```
-I've already published our common library: @ducbaovn/nodejs-common@1.0.0
+I've already published our common library: @ducbaovn/nodejs-common@1.0.1
 ## CURL sample
 1. Create Product:
 ```
@@ -63,7 +63,3 @@ curl --location --request DELETE 'http://localhost:3000/api/v1/products/{id}'
 1. [nodejs-common documentation](https://github.com/ducbaovn/vdc-test/blob/master/nodejs-common/README.md)
 2. [product-service documentation](https://github.com/ducbaovn/vdc-test/blob/master/product-service/README.md)
 3. [activity-service documentation](https://github.com/ducbaovn/vdc-test/blob/master/activity-service/README.md)
-#### Session Model
-- id: string - Use as refreshToken
-- userId: string
-- roleId: string

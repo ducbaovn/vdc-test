@@ -1,6 +1,6 @@
 # NodeJS Common Library
 Name: @ducbaovn/nodejs-common
-Current Version: 1.0.0
+Current Version: 1.0.1
 ## Connections
 1. AMQP Connection:
 - This class is for establish connection to AMQP server.
@@ -64,7 +64,7 @@ export declare class ApiError implements Error {
 3. Log Middleware: init our custom Logger Service
 4. Not Found Middleware: fallback to this middleware if route is not define in routers
 5. Recover: fallback unhandled exception to our custom exception
-## Service
+## Services
 1. Logger Service: custom logger support correlationId
 ```
 export declare class LoggerService {
