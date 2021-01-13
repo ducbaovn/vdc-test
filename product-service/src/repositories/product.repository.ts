@@ -10,13 +10,46 @@ export class ProductRepository extends BaseRepository<ProductModel, ProductDto> 
       toModel: ProductDto.toModel,
     });
   }
-
+  private transformOrderBy(field: string): string {
+    switch (field) {
+      case "price":
+        return PRODUCTS_TABLE_SCHEMA.FIELDS.PRICE
+      case "brand":
+        return PRODUCTS_TABLE_SCHEMA.FIELDS.BRAND
+      case "color":
+        return PRODUCTS_TABLE_SCHEMA.FIELDS.COLOR
+      case "name":
+        return PRODUCTS_TABLE_SCHEMA.FIELDS.NAME
+      default:
+        return PRODUCTS_TABLE_SCHEMA.FIELDS.UPDATED_AT
+    }
+  }
   public query(searchParams: any = {}, offset?: number, limit?: number, isOrder?: boolean): any {
-    const { key, orderBy = PRODUCTS_TABLE_SCHEMA.FIELDS.UPDATED_AT, orderType = "ASC" } = searchParams;
+    const {
+      brand,
+      color,
+      minPrice,
+      maxPrice,
+      key,
+      orderBy = PRODUCTS_TABLE_SCHEMA.FIELDS.UPDATED_AT,
+      orderType = "DESC",
+    } = searchParams;
 
     return (q: QueryBuilder): void => {
       q.where(PRODUCTS_TABLE_SCHEMA.FIELDS.IS_DELETED, false);
-      if (key != null) {
+      if (brand) {
+        q.where(PRODUCTS_TABLE_SCHEMA.FIELDS.BRAND, brand);
+      }
+      if (color) {
+        q.where(PRODUCTS_TABLE_SCHEMA.FIELDS.COLOR, color);
+      }
+      if (minPrice != null && parseInt(minPrice, 10)) {
+        q.where(PRODUCTS_TABLE_SCHEMA.FIELDS.PRICE, ">=", parseInt(minPrice, 10));
+      }
+      if (maxPrice != null && parseInt(maxPrice, 10)) {
+        q.where(PRODUCTS_TABLE_SCHEMA.FIELDS.PRICE, "<=", parseInt(maxPrice, 10));
+      }
+      if (key) {
         q.where((q1: QueryBuilder) => {
           q1.whereRaw(`LOWER(${PRODUCTS_TABLE_SCHEMA.FIELDS.NAME}) LIKE ?`, `%${key.toLowerCase()}%`);
           q1.orWhereRaw(`LOWER(${PRODUCTS_TABLE_SCHEMA.FIELDS.DESCRIPTION}) LIKE ?`, `%${key.toLowerCase()}%`);
@@ -29,7 +62,7 @@ export class ProductRepository extends BaseRepository<ProductModel, ProductDto> 
         q.limit(limit);
       }
       if (isOrder != null) {
-        q.orderBy(orderBy, orderType);
+        q.orderBy(this.transformOrderBy(orderBy), orderType);
       }
     };
   }

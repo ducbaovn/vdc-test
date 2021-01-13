@@ -75,6 +75,12 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
 networks:
   default:
     name: 'activity-service'
