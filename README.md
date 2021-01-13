@@ -60,9 +60,9 @@ curl --location --request PUT 'http://localhost:3000/api/v1/products/{id}' \
 curl --location --request DELETE 'http://localhost:3000/api/v1/products/{id}'
 ```
 ## Documentation
-1. [nodejs-common documentation]
-2. [product-service documentation]
-3. [activity-service documentation] 
+1. [nodejs-common documentation](https://github.com/ducbaovn/vdc-test/blob/master/nodejs-common/README.md)
+2. [product-service documentation](https://github.com/ducbaovn/vdc-test/blob/master/product-service/README.md)
+3. [activity-service documentation](https://github.com/ducbaovn/vdc-test/blob/master/activity-service/README.md)
 #### Session Model
 - id: string - Use as refreshToken
 - userId: string
