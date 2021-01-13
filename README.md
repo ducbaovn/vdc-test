@@ -41,7 +41,7 @@ curl --location --request POST 'http://localhost:3000/api/v1/products' \
 You can capture id in response for later curl
 2. List Product:
 ```
-curl --location --request GET 'http://localhost:3000/api/v1/products?key=&brand=&color=&minPrice&maxPrice=&offset=&limit=&orderBy=&orderType='
+curl --location --request GET 'http://localhost:3000/api/v1/products?key=&brand=&color=&minPrice=&maxPrice=&offset=&limit=&orderBy=&orderType='
 ```
 3. Get Product Detail:
 ```
