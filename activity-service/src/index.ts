@@ -18,7 +18,10 @@ const bootstrap = async () => {
   await Database.getInstance();
   console.info("Connecting to amqp server...");
   const amqp = await AmqpConnection.connect({
-    connectionString: Configuration.AMQP_URI,
+    host: Configuration.AMQP.HOST,
+    port: Configuration.AMQP.PORT,
+    username: Configuration.AMQP.USERNAME,
+    password: Configuration.AMQP.PASSWORD,
   });
   console.info("Consume to activity topic. Listening for message...");
   amqp.consumeTopic(ActivityWorker.EXCHANGE, ActivityWorker.KEYS, ActivityWorker.callback);

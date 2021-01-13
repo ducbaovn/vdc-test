@@ -15,7 +15,7 @@
   "author": "ducbaovn",
   "license": "ISC",
   "dependencies": {
-    "@ducbaovn/nodejs-common": "0.0.15",
+    "@ducbaovn/nodejs-common": "0.0.18",
     "@types/mongodb": "^3.6.3",
     "bookshelf": "^1.2.0",
     "dotenv": "^8.2.0",

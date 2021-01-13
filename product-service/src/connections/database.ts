@@ -9,10 +9,11 @@ export class Database extends SqlConnection {
     super({
       client: "mysql",
       host: Configuration.DATABASE.HOST,
+      port: Configuration.DATABASE.PORT,
       user: Configuration.DATABASE.USER,
       password: Configuration.DATABASE.PASSWORD,
       database: Configuration.DATABASE.DB,
-      migrationFolder: __dirname + "/migrations",
+      migrationFolder: __dirname + "/../migrations",
     });
     this.bookshelf = Bookshelf(this.instance);
   }

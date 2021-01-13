@@ -1,3 +1,3 @@
-import ProductSv from "./Product.service";
+import ProductSv from "./product.service";
 
 export const ProductService = new ProductSv();

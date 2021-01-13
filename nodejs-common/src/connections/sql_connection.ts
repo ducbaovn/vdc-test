@@ -4,7 +4,7 @@ import waitOn from "wait-on";
 export interface SqlConfig {
   client?: string;
   host?: string;
-  port?: number;
+  port?: string;
   user?: string;
   password?: string;
   database?: string;
@@ -22,7 +22,7 @@ export class SqlConnection {
     const defaultConf: any = {
       client: "mysql",
       host: "127.0.0.1",
-      port: 3306,
+      port: "3306",
       user: "root",
       password: "admin",
       database: "test",
@@ -56,7 +56,7 @@ export class SqlConnection {
       }
       console.info("All migrations were success");
     } catch (error) {
-      console.error("Cannot connect database");
+      console.error("Cannot connect database: ", error);
     }
   }
 }

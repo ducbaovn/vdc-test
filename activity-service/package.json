@@ -15,7 +15,7 @@
   "author": "ducbaovn",
   "license": "ISC",
   "dependencies": {
-    "@ducbaovn/nodejs-common": "0.0.14",
+    "@ducbaovn/nodejs-common": "0.0.18",
     "@types/amqplib": "^0.5.17",
     "dotenv": "^8.2.0",
     "source-map-support": "^0.5.19"

@@ -7,7 +7,10 @@ export class Database extends MongoDbConnection {
   private static instance: Database;
   private constructor() {
     super({
-      connectionString: Configuration.DATABASE.URI,
+      host: Configuration.DATABASE.HOST,
+      port: Configuration.DATABASE.PORT,
+      username: Configuration.DATABASE.USERNAME,
+      password: Configuration.DATABASE.PASSWORD,
       database: Configuration.DATABASE.DB,
     });
   }

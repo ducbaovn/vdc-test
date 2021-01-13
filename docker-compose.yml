@@ -1,0 +1,80 @@
+version: '3.5'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    volumes:
+      - ${PWD}/local/rabbitmq/etc/:/etc/rabbitmq/
+      - ${PWD}/local/rabbitmq/data/:/var/lib/rabbitmq/
+      - ${PWD}/local/rabbitmq/logs/:/var/log/rabbitmq/
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_PASSWORD=123456
+      - MYSQL_USER=product
+      - MYSQL_DATABASE=product-service
+    volumes:
+      - ${PWD}/local/mysql/data:/var/lib/mysql
+      - ${PWD}/local/mysql/config/conf.d:/etc/mysql/conf.d
+
+  mongo:
+    image: mongo:4.4
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: activity-service
+    volumes:
+      - ${PWD}/local/mongodb/data:/data/db
+
+  activity-service:
+    build:
+      context: ${PWD}/activity-service
+      dockerfile: ${PWD}/activity-service/Dockerfile
+    ports:
+      - 3001:3001
+    env_file:
+      - ${PWD}/activity-service/.env
+    depends_on:
+      - mongo
+    volumes:
+      - ${PWD}/activity-service/src:/app/src
+      - ${PWD}/activity-service/test:/app/test
+    restart: on-failure
+
+  product-service:
+    build:
+      context: ${PWD}/product-service
+      dockerfile: ${PWD}/product-service/Dockerfile
+    ports:
+      - 3000:3000
+    env_file:
+      - ${PWD}/product-service/.env
+    depends_on:
+      - mysql
+    volumes:
+      - ${PWD}/product-service/src:/app/src
+      - ${PWD}/product-service/test:/app/test
+    restart: on-failure
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+
+networks:
+  default:
+    name: 'activity-service'
