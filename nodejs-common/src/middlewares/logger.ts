@@ -3,8 +3,10 @@ import { LoggerService } from "../services";
 
 export const logger = (level = "info"): express.RequestHandler => {
   return (req, res, next) => {
+    const correlationId = req.headers["x-correlation-id"] as string
     const logger = new LoggerService({
-      level: level,
+      level,
+      correlationId,
     });
     res.locals.logger = logger;
     next();
