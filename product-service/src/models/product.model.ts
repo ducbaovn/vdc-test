@@ -10,6 +10,8 @@ export const PRODUCTS_TABLE_SCHEMA = {
     IS_DELETED: "is_deleted",
     NAME: "name",
     PRICE: "price",
+    BRAND: "brand",
+    COLOR: "color",
     DESCRIPTION: "description",
   },
 };

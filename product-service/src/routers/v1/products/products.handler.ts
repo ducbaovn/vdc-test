@@ -1,12 +1,13 @@
 import * as express from "express";
 import { HttpCode } from "@ducbaovn/nodejs-common";
 import { ProductService } from "../../../services";
+import { ProductDto } from "../../../dtos";
 
 export class ProductHandler {
   public static async create(req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> {
     try {
-      const { name, price, description } = req.body;
-      const product = await ProductService.insert(name, price, description);
+      const product = ProductDto.fromRequest(req.body);
+      await ProductService.insert(product);
       res.status(HttpCode.OK);
       res.json(product);
     } catch (error) {
@@ -28,8 +29,8 @@ export class ProductHandler {
   public static async update(req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> {
     try {
       const { id } = req.params;
-      const { name, price, description } = req.body;
-      const product = await ProductService.update(id, name, price, description);
+      const product = ProductDto.fromRequest(req.body);
+      await ProductService.update(id, product);
       res.status(HttpCode.OK);
       res.json(product);
     } catch (error) {

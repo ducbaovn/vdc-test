@@ -7,6 +7,8 @@ import { BaseDto } from "./base.dto";
 export class ProductDto extends BaseDto {
   public name!: string;
   public price!: number;
+  public brand!: string;
+  public color!: string;
   public description?: string;
 
   public static fromModel(model: ProductModel, filters: string[]): ProductDto {
@@ -21,6 +23,8 @@ export class ProductDto extends BaseDto {
     dto.updatedAt = DataTypeUtils.getDate(model.get(PRODUCTS_TABLE_SCHEMA.FIELDS.UPDATED_AT));
     dto.name = DataTypeUtils.getString(model.get(PRODUCTS_TABLE_SCHEMA.FIELDS.NAME));
     dto.price = DataTypeUtils.getNumber(model.get(PRODUCTS_TABLE_SCHEMA.FIELDS.PRICE));
+    dto.brand = DataTypeUtils.getString(model.get(PRODUCTS_TABLE_SCHEMA.FIELDS.BRAND));
+    dto.color = DataTypeUtils.getString(model.get(PRODUCTS_TABLE_SCHEMA.FIELDS.COLOR));
     dto.description = DataTypeUtils.getString(model.get(PRODUCTS_TABLE_SCHEMA.FIELDS.DESCRIPTION));
 
     CommonUtils.filter(dto, filters);
@@ -46,7 +50,23 @@ export class ProductDto extends BaseDto {
     if (dto.price != null) {
       model[PRODUCTS_TABLE_SCHEMA.FIELDS.PRICE] = dto.price;
     }
+    if (dto.brand != null) {
+      model[PRODUCTS_TABLE_SCHEMA.FIELDS.BRAND] = dto.brand;
+    }
+    if (dto.color != null) {
+      model[PRODUCTS_TABLE_SCHEMA.FIELDS.COLOR] = dto.color;
+    }
     return model;
+  }
+  public static fromRequest(body: any): ProductDto {
+    const { name, price, description, brand, color } = body;
+    const product = new ProductDto();
+    product.name = name;
+    product.price = price;
+    product.description = description;
+    product.brand = brand;
+    product.color = color;
+    return product;
   }
   public validate() {
     if (!this.name || this.price == null) {
