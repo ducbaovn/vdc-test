@@ -26,7 +26,7 @@ and mongodb client on http://localhost:8181
 username: root
 password: example
 ```
-I've already published our common library: @ducbaovn/nodejs-common@1.0.1
+I've already published our common library: @ducbaovn/nodejs-common@1.0.3
 ## CURL sample
 1. Create Product:
 ```

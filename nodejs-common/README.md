@@ -1,6 +1,6 @@
 # NodeJS Common Library
-Name: @ducbaovn/nodejs-common
-Current Version: 1.0.1
+- Name: @ducbaovn/nodejs-common
+- Current Version: 1.0.3
 ## Connections
 1. AMQP Connection:
 - This class is for establish connection to AMQP server.
