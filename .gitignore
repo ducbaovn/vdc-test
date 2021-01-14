@@ -3,3 +3,4 @@ local
 build
 *.tsbuildinfo
 .DS_Store
+.nyc_output

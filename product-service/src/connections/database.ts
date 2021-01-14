@@ -14,6 +14,7 @@ export class Database extends SqlConnection {
       password: Configuration.DATABASE.PASSWORD,
       database: Configuration.DATABASE.DB,
       migrationFolder: __dirname + "/../migrations",
+      seedFolder: __dirname + "/../../test/api_test/seeds"
     });
     this.bookshelf = Bookshelf(this.instance);
   }

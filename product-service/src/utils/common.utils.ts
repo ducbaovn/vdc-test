@@ -3,7 +3,7 @@ export class CommonUtils {
     if (val != null) {
       filters.forEach((field) => {
         if (val.hasOwnProperty(field)) {
-          val[field] = undefined;
+          delete val[field]
         }
       });
     }

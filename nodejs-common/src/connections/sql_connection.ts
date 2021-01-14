@@ -12,6 +12,7 @@ export interface SqlConfig {
   timezone?: string;
   debug?: boolean;
   migrationFolder?: string;
+  seedFolder?: string;
 }
 
 export class SqlConnection {
@@ -55,6 +56,25 @@ export class SqlConnection {
         });
       }
       console.info("All migrations were success");
+    } catch (error) {
+      console.error("Cannot connect database: ", error);
+    }
+  }
+
+  public async seed(): Promise<void> {
+    try {
+      await waitOn({
+        resources: [`tcp:${this.config.host}:${this.config.port}`],
+        timeout: 30000,
+        tcpTimeout: 10000,
+      });
+      if (this.config.seedFolder) {
+        console.info("Perform database seed data");
+        await this.instance.seed.run({
+          directory: this.config.seedFolder,
+        });
+      }
+      console.info("All seeds were success");
     } catch (error) {
       console.error("Cannot connect database: ", error);
     }

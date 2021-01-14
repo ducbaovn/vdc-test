@@ -1,5 +1,15 @@
 # Product Service
 This service focus on product management. This implement DTO, Model and business logic
+## Test
+- unit test
+```
+npm run unittest
+```
+- api test: we need to setup prerequisites env for run api test so we must run `docker-compose.apitest.yml` first. After that, view logs and report in container logs
+```
+docker-compose -f docker-compose.apitest.yml up -d
+docker logs -f product-service_product-service-apitest_1
+```
 ## Database
 We use MySQL for Product Service. To prevent init many connections to database, we implement Database Singleton
 ```

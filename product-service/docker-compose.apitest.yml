@@ -1,0 +1,56 @@
+version: '3.5'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  mysql-apitest:
+    image: mysql:5.7
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_PASSWORD=123456
+      - MYSQL_USER=product
+      - MYSQL_DATABASE=product-service
+
+  mongo:
+    image: mongo:4.4
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: activity-service
+
+  activity-service:
+    build:
+      context: ${PWD}/../activity-service
+      dockerfile: ${PWD}/../activity-service/Dockerfile
+    ports:
+      - 3001:3001
+    env_file:
+      - ${PWD}/../activity-service/.env
+    depends_on:
+      - mongo
+    restart: on-failure
+
+  product-service-apitest:
+    build:
+      context: ${PWD}
+      dockerfile: ${PWD}/Dockerfile
+      target: apitest
+    ports:
+      - 3000:3000
+    env_file:
+      - ${PWD}/.test.env
+    depends_on:
+      - mysql-apitest
+
+networks:
+  default:
+    name: 'icommerce'

@@ -7,6 +7,8 @@ This is a coding sample for 2 services in iCommerce microservices. This sample i
 - typescripts
 - eslint & prettier: linting and auto-format
 - husky & lint-staged: git-hook to auto-format before commit
+## Test
+Unit test & api test using mocha, chai & supertest. Please read detail on [product-service documentation](https://github.com/ducbaovn/vdc-test/blob/master/product-service/README.md)
 ## Installation
 ```
 docker-compose up -d

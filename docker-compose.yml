@@ -46,9 +46,6 @@ services:
       - ${PWD}/activity-service/.env
     depends_on:
       - mongo
-    volumes:
-      - ${PWD}/activity-service/src:/app/src
-      - ${PWD}/activity-service/test:/app/test
     restart: on-failure
 
   product-service:
@@ -61,9 +58,6 @@ services:
       - ${PWD}/product-service/.env
     depends_on:
       - mysql
-    volumes:
-      - ${PWD}/product-service/src:/app/src
-      - ${PWD}/product-service/test:/app/test
     restart: on-failure
 
   mongo-express:
@@ -83,4 +77,4 @@ services:
 
 networks:
   default:
-    name: 'activity-service'
+    name: 'icommerce'

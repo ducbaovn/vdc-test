@@ -85,6 +85,10 @@ export class Application {
         throw error;
     }
   }
+
+  get express(): express.Express {
+    return this.app
+  }
 }
 
 export default Application;
