@@ -59,6 +59,106 @@ describe('Product API Route', () => {
         .expect(200)
         .then(res => {
           expect(res.body.data).to.be.an('array')
+          res.body.data.forEach((element: any) => {
+            expect(element).to.have.property('isDeleted', false)
+          });
+          done()
+        })
+        .catch(done)
+    })
+    it('return 200 success with brand filter', (done) => {
+      request
+        .get('/api/v1/products?brand=samsung')
+        .expect(200)
+        .then(res => {
+          expect(res.body.data).to.be.an('array')
+          res.body.data.forEach((element: any) => {
+            console.log(element)
+            expect(element).to.have.property('brand', 'samsung')
+          });
+          done()
+        })
+        .catch(done)
+    })
+    it('return 200 success with color filter', (done) => {
+      request
+        .get('/api/v1/products?color=black')
+        .expect(200)
+        .then(res => {
+          expect(res.body.data).to.be.an('array')
+          res.body.data.forEach((element: any) => {
+            console.log(element)
+            expect(element).to.have.property('color', 'black')
+          });
+          done()
+        })
+        .catch(done)
+    })
+    it('return 200 success with color filter', (done) => {
+      request
+        .get('/api/v1/products?color=black&brand=samsung')
+        .expect(200)
+        .then(res => {
+          expect(res.body.data).to.be.an('array')
+          res.body.data.forEach((element: any) => {
+            console.log(element)
+            expect(element).to.have.property('brand', 'samsung')
+            expect(element).to.have.property('color', 'black')
+          });
+          done()
+        })
+        .catch(done)
+    })
+    it('return 200 success with min price', (done) => {
+      request
+        .get('/api/v1/products?minPrice=25000000')
+        .expect(200)
+        .then(res => {
+          expect(res.body.data).to.be.an('array')
+          res.body.data.forEach((element: any) => {
+            console.log(element)
+            expect(element.price).greaterThan(25000000)
+          });
+          done()
+        })
+        .catch(done)
+    })
+    it('return 200 success with max price', (done) => {
+      request
+        .get('/api/v1/products?maxPrice=25000000')
+        .expect(200)
+        .then(res => {
+          expect(res.body.data).to.be.an('array')
+          res.body.data.forEach((element: any) => {
+            console.log(element)
+            expect(element.price).lessThan(25000000)
+          });
+          done()
+        })
+        .catch(done)
+    })
+    it('return 200 success with key search', (done) => {
+      request
+        .get('/api/v1/products?key=sung')
+        .expect(200)
+        .then(res => {
+          expect(res.body.data).to.be.an('array')
+          res.body.data.forEach((element: any) => {
+            console.log(element)
+            const content = element.name + ' ' + element.description
+            expect(content.toLowerCase().includes('sung')).true
+          });
+          done()
+        })
+        .catch(done)
+    })
+    it('return 200 success with limit 5 items', (done) => {
+      request
+        .get('/api/v1/products?limit=5')
+        .expect(200)
+        .then(res => {
+          expect(res.body.data).to.be.an('array')
+          expect(res.body.data).length(5)
           done()
         })
         .catch(done)

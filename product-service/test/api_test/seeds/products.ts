@@ -18,7 +18,7 @@ export async function seed(knex: Knex): Promise<void> {
         ('1fc91b1f-ff81-43f1-892c-f848ba9443cd', 0, 'iphone 12', 21000000, NULL, 'apple', 'red'),
         ('b9ee19ae-96b6-43e4-acc4-7e81d2ceb694', 0, 'iphone 12 mini', 18000000, NULL, 'apple', 'green'),
         ('62071a17-2f0c-4c81-b99e-8e700afe30e7', 0, 'iphone 12 pro', 27000000, NULL, 'apple', 'white'),
-        ('33f1cf1c-c1d3-4b09-80ee-645ad5498efb', 0, 'iphone 12 pro max', 31500000, NULL, 'apple', 'black'),
+        ('33f1cf1c-c1d3-4b09-80ee-645ad5498efb', 0, 'iphone 12 pro max', 31500000, 'better than samsung', 'apple', 'black'),
         ('2402b762-9836-4fca-8acf-12aa6431af5c', 0, 'samsung note 20', 23000000, 'worse than iphone', 'samsung', 'black'),
         ('f8ae3bcd-4575-4fec-8a6b-96a4bc398839', 1, 'samsung note 20', 23000000, 'worse than iphone', NULL, NULL),
         ('30e020a7-ccaf-4c53-ab06-8cf8d0ca3d3c', 0, 'samsung note 20 ultra', 27000000, NULL, 'samsung', 'blue'),
