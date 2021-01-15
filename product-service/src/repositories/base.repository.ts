@@ -42,15 +42,16 @@ export class BaseRepository<T extends BaseModel<T>, X extends BaseDto> {
       throw new ApiError();
     }
     const object = await this.findOne(id);
-    if (object != null) {
-      return new this.model({ id: id }).save(
-        { is_deleted: 1 },
-        {
-          patch: true,
-          transacting: t,
-        },
-      );
+    if (object == null) {
+      throw new ApiError(ErrorCode.NOT_FOUND, HttpCode.NOT_FOUND)
     }
+    return new this.model({ id: id }).save(
+      { is_deleted: 1 },
+      {
+        patch: true,
+        transacting: t,
+      },
+    );
   }
 
   public async updateByQuery(callback: (qb: QueryBuilder) => void, data: any, t?: Transaction): Promise<T> {

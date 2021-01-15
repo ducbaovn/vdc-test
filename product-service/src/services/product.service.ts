@@ -9,13 +9,14 @@ export class ProductService extends BaseService<ProductDto, typeof ProductReposi
   }
 
   public async insert(product: ProductDto): Promise<ProductDto> {
-    product.validate();
     return ProductRepository.insert(product);
   }
 
   public async update(id: string, product: ProductDto): Promise<ProductDto> {
-    product.id = id;
-    return ProductRepository.update(product);
+    const item = await this.detail(id)
+    product.id = id
+    await ProductRepository.update(product);
+    return item
   }
 
   public async list(searchParams: any = {}, offset?: number, limit?: number, related = [], filters = []) {

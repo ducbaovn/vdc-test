@@ -80,8 +80,11 @@ export declare abstract class BaseModel<T> extends BaseModel_base<any> {
 ```
 ### Services
 Encapsulate the business logic. It is "Client Business Logic" in image above
-## Activity Middleware
+## Middleware
+### Activity Middleware
 Init AMQP connection and publish message to activity topic
+### Body Validator Middleware
+Using `jsonschema` to vilidate request body. All schemas are defined in `/validators`
 ## Routers
 Define routing and handling
 ## Dtos

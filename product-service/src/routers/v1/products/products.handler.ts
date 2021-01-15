@@ -42,8 +42,8 @@ export class ProductHandler {
     try {
       const { id } = req.params;
       await ProductService.delete(id);
-      res.status(HttpCode.OK);
-      res.json({ id });
+      res.status(HttpCode.NO_CONTENT);
+      res.end();
     } catch (error) {
       next(error);
     }

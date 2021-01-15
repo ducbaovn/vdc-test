@@ -68,9 +68,4 @@ export class ProductDto extends BaseDto {
     product.color = color;
     return product;
   }
-  public validate() {
-    if (!this.name || this.price == null) {
-      throw new ApiError(ErrorCode.MISSING_PARAMETERS, HttpCode.BAD_REQUEST);
-    }
-  }
 }
