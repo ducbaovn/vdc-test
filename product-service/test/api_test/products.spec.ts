@@ -164,5 +164,34 @@ describe('Product API Route', () => {
         .catch(done)
     })
   })
+  describe('GET /products', () => {
+    it('return 200 success', (done) => {
+      request
+        .get('/api/v1/products/0aaf3fa0-6de2-478b-b03a-ef1c61805e61')
+        .expect(200)
+        .then(res => {
+          expect(res.body.name).equal("iphone 11 pro max")
+          expect(res.body.price).equal(33000000)
+          expect(res.body.brand).equal("apple")
+          expect(res.body.color).equal("black")
+          expect(res.body.description).equal("best phone")
+          expect(res.body.isDeleted).equal(false)
+          expect(res.body.id).equal("0aaf3fa0-6de2-478b-b03a-ef1c61805e61")
+          done()
+        })
+        .catch(done)
+    })
+    it('return 404 not found', (done) => {
+      request
+        .get('/api/v1/products/idnotexist')
+        .expect(404)
+        .then(res => {
+          expect(res.body.code).equal(ErrorCode.NOT_FOUND.code)
+          expect(res.body.message).equal(ErrorCode.NOT_FOUND.message)
+          done()
+        })
+        .catch(done)
+    })
+  })
 })
 

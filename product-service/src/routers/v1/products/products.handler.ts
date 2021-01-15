@@ -18,7 +18,7 @@ export class ProductHandler {
   public static async detail(req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> {
     try {
       const { id } = req.params;
-      const product = await ProductService.findOne(id);
+      const product = await ProductService.detail(id);
       res.status(HttpCode.OK);
       res.json(product);
     } catch (error) {
